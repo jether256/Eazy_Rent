@@ -1,7 +1,8 @@
 
 import 'dart:io';
-import 'dart:typed_data';
 
+
+import 'package:eazy_rent/providers/aboutprovider.dart';
 import 'package:eazy_rent/providers/ausi.dart';
 import 'package:eazy_rent/providers/banapro.dart';
 import 'package:eazy_rent/providers/busipro.dart';
@@ -77,6 +78,10 @@ FlutterNativeSplash.remove();
 
         ChangeNotifierProvider(
           create:(_) =>TermsProvider(),
+        ),
+
+        ChangeNotifierProvider(
+          create:(_) =>AboutProvider(),
         ),
 
         ChangeNotifierProvider(

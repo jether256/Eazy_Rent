@@ -8,6 +8,7 @@ import '../../../crypt/encrypt.dart';
 
 import '../api/url.dart';
 import '../providers/userprovider.dart';
+import 'checkcode.dart';
 import 'login.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -99,16 +100,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
           }else {
 
-            ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: const Text("Succesfully registered"),
-                  backgroundColor: Colors.green.withOpacity(0.9),
-                  elevation: 10, //shadow
-                )
-            );
+            // ScaffoldMessenger.of(context).showSnackBar(
+            //     SnackBar(
+            //       content: const Text("Succesfully registered"),
+            //       backgroundColor: Colors.green.withOpacity(0.9),
+            //       elevation: 10, //shadow
+            //     )
+            // );
 
             ///verify otp code sent
-            Navigator.pushNamed(context,LoginScreen.id);
+            Navigator.push(context,MaterialPageRoute(builder:(context)=>CheckCode(mail:_ema.text)));
+            //Navigator.pushNamed(context,LoginScreen.id);
 
             print(userData);
           }

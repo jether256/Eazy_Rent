@@ -9,8 +9,10 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../../Navigation-details/dashboardnew.dart';
 import '../../crypt/encrypt.dart';
+import '../../logged-signup/checkcode.dart';
 import '../../logged-signup/forget.dart';
 import '../../logged-signup/loginCheck.dart';
+import '../../models/aboutmodel.dart';
 import '../../models/bannermodel.dart';
 import '../../models/business.dart';
 import '../../models/catpro.dart';
@@ -425,18 +427,21 @@ class ApiCall{
 
         }
 
-        else if(userData=="ye"){
+        else if(userData=="REG"){
 
-          ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: const Text("Succesfully registered"),
-                backgroundColor: Colors.green.withOpacity(0.9),
-                elevation: 10, //shadow
-              )
-          );
+          // ScaffoldMessenger.of(context).showSnackBar(
+          //     SnackBar(
+          //       content: const Text("Succesfully registered"),
+          //       backgroundColor: Colors.green.withOpacity(0.9),
+          //       elevation: 10, //shadow
+          //     )
+          // );
 
           if (context.mounted) {
-            Navigator.pushReplacementNamed(context, LoginScreen.id);
+
+            Navigator.push(context,MaterialPageRoute(builder:(context)=>CheckCode(mail:email)));
+
+            //Navigator.pushReplacementNamed(context, LoginScreen.id);
           }
         }
 
@@ -454,6 +459,76 @@ class ApiCall{
 
 
   }
+
+
+  ///verify email function
+  Future  MailVeri( String email, String code, BuildContext context) async {
+
+    var response = await http.post(
+      Uri.parse(
+          BaseUrl.regVer),
+      //headers can be left out since CORS doesn't affect apps but it will affect A flutter web app,
+      //so just to be safe include them.
+      headers: {"Accept": "headers/json"},
+      body:{
+        "email": encryp(email),
+        "key": encryp(code),
+      },
+    );
+
+
+    if(response.statusCode==200){
+
+      var userData=json.decode(response.body);
+
+      if(context.mounted){// context is needed for the navigator and snackbar to work
+
+        // check if the email already exists else register user
+        if(userData=="ye"){
+
+
+          ///route to login page after verification
+          //Navigator.pushNamed(context,Login.id);
+
+          Navigator.pushReplacementNamed(context,LoginScreen.id);
+
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: const Text("Verification Successfully Login Now"),
+                backgroundColor: Colors.green.withOpacity(0.9),
+                elevation: 10, //shadow
+              )
+          );
+
+        }
+
+        else if(userData=="no"){
+
+
+          ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: const Text("Wrong Code"),
+                backgroundColor: Colors.red.withOpacity(0.9),
+                elevation: 10, //shadow
+              )
+          );
+
+        }
+
+
+      }
+
+    }else{
+
+      return null;
+    }
+
+
+
+
+
+  }
+
 
 
 
@@ -578,6 +653,30 @@ class ApiCall{
     if (response.statusCode == 200) {
 
       return termsFromJson(
+          json.decode(response.body)
+      );
+
+    } else {
+
+      return null;
+
+    }
+
+
+  }
+
+
+  ///get get about
+  Future<List<AboutModel>?> about() async {
+
+    var response = await http.get(
+        Uri.parse(BaseUrl.apiabout),
+        headers: {"Accept": "headers/json"});
+
+
+    if (response.statusCode == 200) {
+
+      return aboutFromJson(
           json.decode(response.body)
       );
 

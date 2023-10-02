@@ -27,7 +27,7 @@ class HomeNew extends StatefulWidget {
 
 class _HomeNewState extends State<HomeNew> {
 
-  final AppRating appRat= new AppRating();
+ // final AppRating appRat= new AppRating();
 
   String? ID,nem,lnem,mail,phone,locat,pic,pass,count,date;
   getPref() async {
@@ -47,7 +47,7 @@ class _HomeNewState extends State<HomeNew> {
   @override
   void initState() {
     super.initState();
-    appRat.rateApp(context);
+   // appRat.rateApp(context);
     getPref();
     _checkLoginStatus();
     //_checkVersion();

@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../logged-signup/login.dart';
 
+import 'about/aboutus.dart';
 import 'acount/editacc.dart';
 import 'contactus/kota.dart';
 import 'dashboardnew.dart';
@@ -117,7 +118,7 @@ class _ProfileState extends State<Profile> {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Image.asset('assets/images/logo.png',height: 50,width: 50,)
+              Image.asset('assets/images/loo.png',height: 50,width: 50,)
             ],
           ),
           content: const Text('Please Login first to continue',style:TextStyle(color:Colors.white),),
@@ -306,7 +307,7 @@ class _ProfileState extends State<Profile> {
 
 
 
-                    //Navigator.push(context, MaterialPageRoute(builder:(context)=>const ContactusPage()));
+                    Navigator.push(context, MaterialPageRoute(builder:(context)=>const AboutUs()));
 
 
                     //EasyLoading.showSuccess('About us clicked.....');

@@ -49,6 +49,35 @@ class UserProvider with ChangeNotifier{
   }
 
 
+  //verify registration otp
+  verifyOtp({
+    required String email,
+    required BuildContext context,
+    required String code,
+  }) async {
+    isLoading = true;
+    notifyListeners();
+
+    final response = await _service.MailVeri(email,code,context);
+    _verify=response as Map<String, dynamic>?;
+    notifyListeners();
+
+    isLoading=false;
+    notifyListeners();
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   //Login
   void loginUser({

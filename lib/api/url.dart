@@ -15,7 +15,9 @@ static String proImageUrl5="$address//api/owner/mage5/";
 static String banaIm="$address//api/owner/businesses/bana/";
 
 //authentication
-  static String apiRegister = "https://$address/api/user/register.php";
+  static String apiRegister = "https://$address/api/user/log/register.php";
+
+  static String regVer = "https://$address/api/user/log/verify.php";
 
   static String regVerify = "https://$address/api/log/verify.php";
 
@@ -43,6 +45,7 @@ static String banaIm="$address//api/owner/businesses/bana/";
   static String apiSearchAll = "https://$address/api/user/searchall.php";
 
   static String apiterms = "https://$address/api/user/conatct/terms.php";
+  static String apiabout = "https://$address/api/user/conatct/about.php";
 
   static String bana = "https://$address//api/user/banner/getBana.php";
 

@@ -122,7 +122,7 @@ _checkLoginStatus();
 
   _checkLoginStatus() async {
     SharedPreferences localStorage= await SharedPreferences.getInstance();
-    var Id=localStorage.getString('cust_id');
+    var Id=localStorage.getString('id');
 
     if(Id != null){
 
@@ -143,7 +143,7 @@ _checkLoginStatus();
           title: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Image.asset('assets/images/logo.png',height: 50,width: 50,)
+              Image.asset('assets/images/loo.png',height: 50,width: 50,)
             ],
           ),
           content: const Text('Please Login first to continue',style:TextStyle(color:Colors.white),),
@@ -498,7 +498,7 @@ _checkLoginStatus();
                                onTap: (){
 
 
-                                 openWhatsapp();
+                                 isLoggedIn ? openWhatsapp():please();
 
                                  ///_roomProvider.selectedChat(_chatroomId);
 
@@ -557,7 +557,7 @@ _checkLoginStatus();
                               onTap: (){
 
 
-                                launch('tel:${widget.fon}');
+                                isLoggedIn ? launch('tel:${widget.fon}'):please();
 
                               },
                               child: Container(
